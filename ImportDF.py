@@ -13,8 +13,8 @@ def change_columnsName(df):
         df.rename(columns={i:i + '_' + df.name},inplace=True)
     return df
 
-def ImportDF(folderName):
-    pathImportSI = os.getcwd() + '/export/'+folderName
+def ImportDF(pathName,folderName):
+    pathImportSI =pathName+folderName
     all_filesSI = glob.glob(pathImportSI + "/*.csv")
     all_filesSI.sort(key=lambda x: os.path.getmtime(x), reverse=True)
     li = []
