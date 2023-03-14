@@ -11,9 +11,9 @@ import pandas as pd
 def processArchive(Content):
   inicio = timeit.default_timer()
   script_dir = os.path.abspath(os.path.dirname(sys.argv[0]) or '.')
-  TEC = '3G'
+  TEC = '5G'
   pathToSaving = script_dir + '/export/'+TEC+'/'
-  site = 'SubNetwork=ONRM_ROOT_MO_R,SubNetwork=WCDMA,SubNetwork=TSP'
+  site = 'SubNetwork=ONRM_ROOT_MO_R,SubNetwork=NR,SubNetwork=TSP'
   #get everything from table
   #site = ''
   frame_tableList = ImportDF.ImportDF2(script_dir+'/import/TableList/')
@@ -23,13 +23,12 @@ def processArchive(Content):
   tableList = frame_tableList['TableList'].tolist()
   parameterList = frame_tableList['parameterList'].tolist()
 
-  
   if Content == 'TESTE':
     #setup for get everthing from a site 4G-SPVA07*
     #setup for get everthing from table ''
     site = ''
-    site = 'SP7605*'
-    ''' 
+    site = '5G-SPIB42*' 
+    '''
     parameterList = []
     for i in range(len(tableList)):
       parameterList.append(['*'])
@@ -59,31 +58,7 @@ def processArchive(Content):
       for i in list1:
         f.write(str(i) +"\n")
 
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 
   fim = timeit.default_timer()
   print ('duracao FINAL: %.2f' % ((fim - inicio)/60) + ' min')

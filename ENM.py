@@ -30,7 +30,7 @@ def processArchiveReturn(cmd):
       Login = False
       ok = True
     except:
-      times = 1
+      times = 5
       print ("Login Failed, trying again in {} seconds...".format(times))
       time.sleep(times)
       pass

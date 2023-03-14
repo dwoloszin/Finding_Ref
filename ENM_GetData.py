@@ -33,7 +33,7 @@ def processArchive(site,table,parameterList,TEC):
       os.makedirs(csv_path)    
     Frame = tratarArchive(Frame)
     #Frame.head(1).to_csv(csv_path + ArchiveName1 + '.csv',index=False,header=True,sep=';')
-    Frame.to_csv(csv_path + ArchiveName1 + '.csv',index=False,header=True,sep=';')
+    Frame.to_csv(csv_path + TEC+'_' + ArchiveName1 + '.csv',index=False,header=True,sep=';')
     frameCount +=1
   fim = timeit.default_timer()
   print ('duracao: %.2f' % ((fim - inicio)/60) + ' min')

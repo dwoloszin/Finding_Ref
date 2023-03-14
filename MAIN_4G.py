@@ -8,7 +8,7 @@ import pandas as pd
 
 
 
-def processArchive():
+def processArchive(Content):
   inicio = timeit.default_timer()
   script_dir = os.path.abspath(os.path.dirname(sys.argv[0]) or '.')
   TEC = '4G'
@@ -23,17 +23,20 @@ def processArchive():
   tableList = frame_tableList['TableList'].tolist()
   parameterList = frame_tableList['parameterList'].tolist()
 
-  '''
-  #setup for get everthing from a site 4G-SPVA07*
-  #setup for get everthing from table ''
-  site = ''
-  site = '4G-SPIB42*' 
-  parameterList = []
-  for i in range(len(tableList)):
-    parameterList.append(['*'])
-  print(parameterList)
-  #setup for get everthing from a site
-  '''
+
+
+  if Content == 'TESTE':
+    #setup for get everthing from a site 4G-SPVA07*
+    #setup for get everthing from table ''
+    site = ''
+    site = '4G-SPIB42*' 
+    '''
+    parameterList = []
+    for i in range(len(tableList)):
+      parameterList.append(['*'])
+    print(parameterList)
+    #setup for get everthing from a site
+    '''
   
   if os.path.exists(pathToSaving):
     shutil.rmtree(pathToSaving, ignore_errors=False, onerror=None)
@@ -52,32 +55,12 @@ def processArchive():
     except:
       pass
 
-  with open("file.txt", "w") as f:
+  with open(TEC+"_file.txt", "w") as f:
     for list1 in listOfHeader:
       for i in list1:
         f.write(str(i) +"\n")
 
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 
 
