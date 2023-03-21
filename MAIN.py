@@ -1,10 +1,12 @@
 import os
 import sys
 import timeit
-import MERGE
-import MAIN_4G
-import MAIN_3G
+
+#import MERGE
+#import MAIN_4G
+#import MAIN_3G
 import MAIN_5G
+'''
 import AuxPlugInUnit
 import enodebfunction
 import EthernetPort
@@ -28,18 +30,20 @@ import TermPointToAmf
 import UeMeasControl
 import UePolicyOptimization
 import UtranCell
-
+import DUMP
+'''
 inicio = timeit.default_timer()
+MAIN_5G.processArchive('UPDATE')
 
-
+#MAIN_4G.processArchive('UPDATE')
 
 #update data
-MAIN_4G.processArchive('UPDATE')#USE 'TESTE' for test
-MAIN_3G.processArchive('UPDATE')#USE 'TESTE' for test
-MAIN_5G.processArchive('UPDATE')#USE 'TESTE' for test
+#MAIN_4G.processArchive('UPDATE')#USE 'TESTE' for test
+#MAIN_3G.processArchive('UPDATE')#USE 'TESTE' for test
+#MAIN_5G.processArchive('UPDATE')#USE 'TESTE' for test
 
 
-
+'''
 #process data
 enodebfunction.enodebfunction('4G')
 EthernetPort.EthernetPort('5G')
@@ -68,6 +72,13 @@ TermPointToAmf.TermPointToAmf('5G')
 UeMeasControl.UeMeasControl('4G')
 UePolicyOptimization.UePolicyOptimization('4G')
 UtranCell.UtranCell('3G')
+
+
+#DUMP.DUMP('4G')
+#DUMP.DUMP('3G')
+#DUMP.DUMP('5G')
+
+'''
 
 
 

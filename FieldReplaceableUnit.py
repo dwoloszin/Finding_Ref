@@ -18,12 +18,12 @@ def FieldReplaceableUnit(TEC):
   pathToSave = script_dir + '/export/'+'PROCESS'+'/'+this_function_name +'/'
   if not os.path.exists(pathToSave):
     os.makedirs(pathToSave) 
-  
-  Frame = ImportDF.ImportDF2(pathToImport)
-  Frame.drop_duplicates(inplace=True)
-  Frame['TEC'] = TEC
-  Frame = tratarArchive(Frame)
-  Frame.to_csv(pathToSave + TEC+'_' + this_function_name + '.csv',index=False,header=True,sep=';')
+  if os.path.exists(pathToImport):
+    Frame = ImportDF.ImportDF2(pathToImport)
+    Frame.drop_duplicates(inplace=True)
+    Frame['TEC'] = TEC
+    Frame = tratarArchive(Frame)
+    Frame.to_csv(pathToSave + TEC+'_' + this_function_name + '.csv',index=False,header=True,sep=';')
   fim = timeit.default_timer()
   print ('duracao: %.2f' % ((fim - inicio)/60) + ' min')
 
@@ -41,4 +41,6 @@ def tratarArchive(Frame):
     
   return Frame
 
-
+TEC = ['4G','5G']
+for i in TEC:
+  FieldReplaceableUnit(i)

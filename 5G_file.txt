@@ -1,7 +1,6 @@
 TableName_EthernetPort
 NodeId
 syncStatus
-TransportId
 EthernetPortId
 admOperatingMode
 autoNegEnable

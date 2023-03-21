@@ -22,6 +22,11 @@ def processArchive(Content):
   frame_tableList = frame_tableList.sort_values(by=['TableList'], ascending=[True])
   tableList = frame_tableList['TableList'].tolist()
   parameterList = frame_tableList['parameterList'].tolist()
+  dropList = str(frame_tableList['dropList'].tolist()[0])
+  if dropList == 'nan':
+    dropList = []
+  else:
+    dropList = dropList.split(',')
 
   if Content == 'TESTE':
     #setup for get everthing from a site 4G-SPVA07*
@@ -42,7 +47,7 @@ def processArchive(Content):
   count = 0
   for i in parameterList:
     s = ','.join(str(x) for x in i)
-    ENM_GetData.processArchive(site,tableList[count],s,TEC)
+    ENM_GetData.processArchive(site,tableList[count],s,dropList,TEC)
     count +=1
   
   listOfHeader = []
@@ -61,4 +66,7 @@ def processArchive(Content):
  
 
   fim = timeit.default_timer()
-  print ('duracao FINAL: %.2f' % ((fim - inicio)/60) + ' min')
+  print ('duracao FINAL 5G: %.2f' % ((fim - inicio)/60) + ' min')
+
+
+processArchive('UPDATE')  
