@@ -8,16 +8,6 @@ ethernetPortId
 operOperatingMode
 TableName_FeatureState
 NodeId
-syncStatus
-SystemFunctionsId
-LmId
-FeatureStateId
-featureState
-featureStateId
-serviceState
-TableName_FeatureState
-NodeId
-syncStatus
 SystemFunctionsId
 LmId
 FeatureStateId
@@ -29,6 +19,7 @@ NodeId
 syncStatus
 EquipmentId
 FieldReplaceableUnitId
+isSharedWithExternalMe
 productData
 TableName_GNBCUCPFunction
 NodeId

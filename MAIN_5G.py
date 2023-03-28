@@ -22,6 +22,7 @@ def processArchive(Content):
   frame_tableList = frame_tableList.sort_values(by=['TableList'], ascending=[True])
   tableList = frame_tableList['TableList'].tolist()
   parameterList = frame_tableList['parameterList'].tolist()
+  CustomCMDList = frame_tableList['CustomCMD'].tolist()
   dropList = str(frame_tableList['dropList'].tolist()[0])
   if dropList == 'nan':
     dropList = []
@@ -47,7 +48,7 @@ def processArchive(Content):
   count = 0
   for i in parameterList:
     s = ','.join(str(x) for x in i)
-    ENM_GetData.processArchive(site,tableList[count],s,dropList,TEC)
+    ENM_GetData.processArchive(site,tableList[count],s,dropList,TEC,CustomCMDList[count])
     count +=1
   
   listOfHeader = []

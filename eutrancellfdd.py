@@ -19,7 +19,7 @@ def eutrancellfdd(TEC):
   if not os.path.exists(pathToSave):
     os.makedirs(pathToSave) 
   if os.path.exists(pathToImport):  
-    Frame = ImportDF.ImportDF2(pathToImport)
+    Frame = ImportDF.ImportDF3(pathToImport,'EUtranCellFDDId')
     Frame.drop_duplicates(inplace=True)
     Frame['TEC'] = TEC
     Frame = tratarArchive(Frame)
@@ -28,8 +28,13 @@ def eutrancellfdd(TEC):
   print ('duracao: %.2f' % ((fim - inicio)/60) + ' min')
 
 def tratarArchive(Frame):
+  #Frame['PCI'] = (Frame['physicalLayerCellIdGroup'].astype(int)*3) + (Frame['physicalLayerSubCellId'].astype(int))
+
   
   try:
+    Frame.loc[(Frame['NodeId'].isna()) & (Frame['earfcndl'].isin(['1700,1525','1575'])),['NodeId']] = Frame['EUtranCellFDDId'].str[:-2]
+    Frame.loc[(Frame['NodeId'].isna()) & (~Frame['earfcndl'].isin(['1700,1525','1575'])),['NodeId']] = Frame['EUtranCellFDDId'].str[:-1]
+    Frame.loc[Frame['TableName_eutrancellfdd'].isna(),['TableName_eutrancellfdd']] = 'eutrancellfdd'
     Frame['SITE'] = Frame['NodeId']
     Frame.loc[(Frame['NodeId'].str[-2:-1].isin(['-','_'])),['SITE']] = Frame['NodeId'].str[:-2]
     Frame['additionalUpperLayerIndList2'] = Frame['additionalUpperLayerIndList'].str.split(',').str[1]
@@ -42,14 +47,13 @@ def tratarArchive(Frame):
     Frame['FREQ CELL'] = Frame['freqBand'].map({'1':'2100','3':'1800','7':'2600','28':'700'})
     
     Frame['Tecnologia'] = '4G'
-    Frame = Frame.loc[Frame['CELL'] != '0']
-    Frame['PCI'] = Frame['physicalLayerCellIdGroup'].astype(int)*3 + Frame['physicalLayerSubCellId'].astype(int)
+    Frame['PCI'] = (Frame['physicalLayerCellIdGroup'].astype(int)*3) + (Frame['physicalLayerSubCellId'].astype(int))
     Frame['PCI'] = Frame['PCI'].astype(int)
     Frame['VENDOR'] = 'ERICSSON'
     Frame = ShortName.tratarShortNumber(Frame,'SITE')
   except:
     pass
-   
+  
     
   return Frame
 

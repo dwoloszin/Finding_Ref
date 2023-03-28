@@ -14,10 +14,15 @@ for cmd in commands:
 for process in processes:
     process.wait()
 
+    
+
+
+
 
 #RUN in Parallel
 #Processing data
 py_files = glob.glob("*.py")
+#Excluded
 KeepListCompared = ['MAIN.py','MAIN_POOL.py','MAIN_3G.py','MAIN_4G.py', 'MAIN_5G.py','util.py']
 locationBase_comparePMO = py_files
 DellListComparede = list(set(locationBase_comparePMO)^set(KeepListCompared))
