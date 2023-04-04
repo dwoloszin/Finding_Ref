@@ -32,7 +32,7 @@ def tratarArchive(Frame):
   Frame = SplitValues.processArchive3(Frame,'rfBranchRef','RfBranch=')
   Frame = SplitValues.processArchive3(Frame,'rfBranchRef','FieldReplaceableUnit=')
   Frame['FieldReplaceableUnit'] = Frame['FieldReplaceableUnit'].str.split(',').str[0]
-
+  Frame['Ref_0'] = Frame['NodeId'].astype(str) + Frame['SectorEquipmentFunctionId'].astype(str)
   '''
   try:
     Frame = SplitValues.processArchive(Frame,'sectorEquipmentFunctionRef')

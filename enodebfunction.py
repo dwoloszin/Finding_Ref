@@ -32,7 +32,8 @@ def tratarArchive(Frame):
     Frame = SplitValues.processArchive(Frame,'eNodeBPlmnId')
   except:
     pass
-    
+  droplist = ['ENodeBFunctionId','eNodeBPlmnId']
+  Frame.drop(droplist, axis=1, inplace=True,errors='ignore')  
     
   return Frame
 

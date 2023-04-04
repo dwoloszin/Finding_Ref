@@ -19,7 +19,8 @@ def UeMeasControl(TEC):
   if not os.path.exists(pathToSave):
     os.makedirs(pathToSave)
   if os.path.exists(pathToImport):  
-    Frame = ImportDF.ImportDF2(pathToImport)
+    #Frame = ImportDF.ImportDF2(pathToImport)
+    Frame = ImportDF.ImportDF3(pathToImport,'EUtranCellFDDId')
     Frame.drop_duplicates(inplace=True)
     Frame['TEC'] = TEC
     Frame = tratarArchive(Frame)

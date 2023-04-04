@@ -5,6 +5,7 @@ import ImportDF
 import pandas as pd
 import inspect
 import SplitValues
+import GroupBy
 
 
 
@@ -27,13 +28,25 @@ def FeatureState(TEC):
   print ('duracao: %.2f' % ((fim - inicio)/60) + ' min')
 
 def tratarArchive(Frame):
-  '''
   try:
-    Frame = SplitValues.processArchive(Frame,'eNodeBPlmnId')
+    Frame = Frame.loc[:,~Frame.T.duplicated(keep='first')]
+    Frame = GroupBy.processArchive(Frame,'NodeId')
+    columns_to_split = ['FeatureStateId', 'featureState','serviceState']
+    for col in columns_to_split:
+      x = Frame[col].values[:1][0].split('|')
+      y = Frame[columns_to_split[0]].values[:1][0].split('|')
+      #print(x,len(x))
+      columList = []
+      for i in range(len(x)):
+        columList.append(col+'_'+y[i])
+      Frame[columList] = Frame[col].str.split('|', expand=True)
+    Frame = Frame.loc[:, ~Frame.columns.str.startswith(columns_to_split[0]+'_')]      
   except:
     pass
-  '''  
-    
+   
+  droplist = ['SystemFunctionsId','LmId']
+  Frame.drop(droplist, axis=1, inplace=True,errors='ignore')    
+  
   return Frame
 
 FeatureState('5G')

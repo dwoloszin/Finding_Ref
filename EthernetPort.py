@@ -33,6 +33,9 @@ def tratarArchive(Frame):
   except:
     pass
   '''  
+  droplist = ['TransportId']
+  Frame.drop(droplist, axis=1, inplace=True,errors='ignore')   
+    
     
   return Frame
 

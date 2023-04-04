@@ -23,7 +23,7 @@ def processArchive(Content):
   tableList = frame_tableList['TableList'].tolist()
   parameterList = frame_tableList['parameterList'].tolist()
   CustomCMDList = frame_tableList['CustomCMD'].tolist()
-  dropList = str(frame_tableList['dropList'].tolist()[0])
+  dropList = str(frame_tableList['keepList'].tolist()[0])
   if dropList == 'nan':
     dropList = []
   else:
@@ -42,8 +42,6 @@ def processArchive(Content):
     #setup for get everthing from a site
     '''
   
-  if os.path.exists(pathToSaving):
-    shutil.rmtree(pathToSaving, ignore_errors=False, onerror=None)
   
   count = 0
   for i in parameterList:

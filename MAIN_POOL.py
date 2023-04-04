@@ -6,6 +6,8 @@ import glob
 #UPDATE Data
 # Define the commands to run in parallel
 commands = ['python MAIN_3G.py','python MAIN_4G.py', 'python MAIN_5G.py']
+#commands = ['python MAIN_4G.py']
+
 # Run the commands in parallel
 processes = []
 for cmd in commands:
@@ -13,10 +15,6 @@ for cmd in commands:
 # Wait for all processes to complete
 for process in processes:
     process.wait()
-
-    
-
-
 
 
 #RUN in Parallel
@@ -39,11 +37,17 @@ for process in processes:
     process.wait()
 
 
+
+
+
+
 #MERGE
 # Define the commands to run in parallel
 commands = [["python", "-c", "from DUMP import DUMP; DUMP('3G')"],
             ["python", "-c", "from DUMP import DUMP; DUMP('4G')"],
             ["python", "-c", "from DUMP import DUMP; DUMP('5G')"]]
+
+#commands = [["python", "-c", "from DUMP import DUMP; DUMP('4G')"]]
 # Run the commands in parallel
 processes = []
 for cmd in commands:

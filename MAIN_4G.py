@@ -5,6 +5,8 @@ import shutil
 import ENM_GetData
 import ImportDF
 import pandas as pd
+import subprocess
+import numpy as np
 
 
 
@@ -24,34 +26,40 @@ def processArchive(Content):
   parameterList = frame_tableList['parameterList'].tolist()
   CustomCMDList = frame_tableList['CustomCMD'].tolist()
   #dropList = frame_tableList['dropList'].tolist()[0].str.split(',')
-  dropList = str(frame_tableList['dropList'].tolist()[0])
-  if dropList == 'nan':
-    dropList = []
-  else:
-    dropList = dropList.split(',')
+  dropList = frame_tableList['keepList'].tolist()
 
+  dropList2 = []
+  for i in dropList:
+    if str(i) == 'nan':
+      a = []
+    else:
+      a = i.split(',') 
+    dropList2.append(a)
+
+ 
+
+  
   if Content == 'TESTE':
     #setup for get everthing from a site 4G-SPVA07*
     #setup for get everthing from table ''
     site = ''
     site = '4G-SPIB42*' 
-    '''
+    
     parameterList = []
     for i in range(len(tableList)):
       parameterList.append(['*'])
     print(parameterList)
     #setup for get everthing from a site
-    '''
-  
-  if os.path.exists(pathToSaving):
-    shutil.rmtree(pathToSaving, ignore_errors=False, onerror=None)
-  
+
   count = 0
   for i in parameterList:
     s = ','.join(str(x) for x in i)
-    ENM_GetData.processArchive(site,tableList[count],s,dropList,TEC,CustomCMDList[count])
+    ENM_GetData.processArchive(site,tableList[count],s,dropList2[count],TEC,CustomCMDList[count])
     count +=1
-  
+
+
+
+
   listOfHeader = []
   for folderName in tableList:
     try:

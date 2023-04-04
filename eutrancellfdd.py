@@ -32,8 +32,8 @@ def tratarArchive(Frame):
 
   
   try:
-    Frame.loc[(Frame['NodeId'].isna()) & (Frame['earfcndl'].isin(['1700,1525','1575'])),['NodeId']] = Frame['EUtranCellFDDId'].str[:-2]
-    Frame.loc[(Frame['NodeId'].isna()) & (~Frame['earfcndl'].isin(['1700,1525','1575'])),['NodeId']] = Frame['EUtranCellFDDId'].str[:-1]
+    Frame.loc[(Frame['NodeId'].isna()) & (Frame['earfcndl'].isin(['1700','1525','1575'])),['NodeId']] = Frame['EUtranCellFDDId'].str[:-2]
+    Frame.loc[(Frame['NodeId'].isna()) & (~Frame['earfcndl'].isin(['1700','1525','1575'])),['NodeId']] = Frame['EUtranCellFDDId'].str[:-1]
     Frame.loc[Frame['TableName_eutrancellfdd'].isna(),['TableName_eutrancellfdd']] = 'eutrancellfdd'
     Frame['SITE'] = Frame['NodeId']
     Frame.loc[(Frame['NodeId'].str[-2:-1].isin(['-','_'])),['SITE']] = Frame['NodeId'].str[:-2]
@@ -53,7 +53,8 @@ def tratarArchive(Frame):
     Frame = ShortName.tratarShortNumber(Frame,'SITE')
   except:
     pass
-  
+  droplist = ['ENodeBFunctionId','dlChannelBandwidth','freqBand','physicalLayerCellIdGroup','physicalLayerSubCellId']
+  Frame.drop(droplist, axis=1, inplace=True,errors='ignore')  
     
   return Frame
 

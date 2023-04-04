@@ -31,6 +31,8 @@ def tratarArchive(Frame):
     Frame = SplitValues.processArchive(Frame,'productData')
   except:
     pass
+  droplist = ['EquipmentId','AuxPlugInUnitId','RbsSubrackId']
+  Frame.drop(droplist, axis=1, inplace=True,errors='ignore')
   return Frame
 
 

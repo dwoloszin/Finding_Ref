@@ -21,8 +21,8 @@ def RfBranch(TEC):
   if os.path.exists(pathToImport):
     Frame = ImportDF.ImportDF2(pathToImport)
     Frame.drop_duplicates(inplace=True)
-    Frame['TEC'] = TEC
     Frame = tratarArchive(Frame)
+    Frame['TEC'] = TEC
     Frame.to_csv(pathToSave + TEC+'_' + this_function_name + '.csv',index=False,header=True,sep=';')
   fim = timeit.default_timer()
   print ('duracao: %.2f' % ((fim - inicio)/60) + ' min')
@@ -31,6 +31,7 @@ def tratarArchive(frameSI):
   df = frameSI.astype(str)
   listData = []
   li = []
+  #frameSI = frameSI.loc[~(frameSI['NodeId'].str[:2] == '5G')]
   for index, row in df.iterrows(): 
     if 'MeContext=' in row['rfPortRef']:
       string0 = row['reservedBy'].replace('\t',';')

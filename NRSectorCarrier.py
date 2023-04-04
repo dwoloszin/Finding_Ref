@@ -14,7 +14,7 @@ def NRSectorCarrier(TEC):
   this_function_name = inspect.currentframe().f_code.co_name
   print(this_function_name, ' Processing...')
   pathToImport = script_dir + '/export/'+TEC+'/'+this_function_name
-  pathToSave = script_dir + '/export/'+'PROCESS'+'/'+this_function_name +'/'
+  pathToSave = script_dir + '/export/'+'PROCESS'+'/'+'SectorCarrier' +'/'
   if not os.path.exists(pathToSave):
     os.makedirs(pathToSave) 
   if os.path.exists(pathToImport):  
@@ -27,10 +27,13 @@ def NRSectorCarrier(TEC):
   print ('duracao: %.2f' % ((fim - inicio)/60) + ' min')
 
 def tratarArchive(Frame):
+  
   try:
-    Frame = SplitValues.processArchive(Frame,'sectorEquipmentFunctionRef')
+    Frame = SplitValues.processArchive3(Frame,'sectorEquipmentFunctionRef','SectorEquipmentFunction=')
   except:
     pass   
+  
   return Frame
+
 
 NRSectorCarrier('5G')

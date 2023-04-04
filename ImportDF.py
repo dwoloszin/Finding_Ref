@@ -46,7 +46,7 @@ def ImportDF2(pathImportSI):
 
 
 
-
+#Corrigir qdo não tem 2 arquivos
 def ImportDF3(pathImportSI,index1):
     #pathImportSI = os.getcwd() + '/export/'+folderName
     all_filesSI = glob.glob(pathImportSI + "/*.csv")

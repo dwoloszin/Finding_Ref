@@ -9,7 +9,7 @@ import SplitValues
 
 
 script_dir = os.path.abspath(os.path.dirname(sys.argv[0]) or '.')
-def FieldReplaceableUnit(TEC):
+def CommonBeamforming(TEC):
   inicio = timeit.default_timer()
   script_dir = os.path.abspath(os.path.dirname(sys.argv[0]) or '.')
   this_function_name = inspect.currentframe().f_code.co_name
@@ -32,15 +32,15 @@ def FieldReplaceableUnit(TEC):
 
 def tratarArchive(Frame):
   
-  
+  '''
   try:
     Frame = SplitValues.processArchive(Frame,'productData')
   except:
     pass
   Frame['Ref_0'] = Frame['NodeId'].astype(str) + Frame['FieldReplaceableUnitId'].astype(str)
-    
+  '''  
   return Frame
 
 TEC = ['4G','5G']
 for i in TEC:
-  FieldReplaceableUnit(i)
+  CommonBeamforming(i)
