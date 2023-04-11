@@ -15,7 +15,7 @@ def processArchive(Content):
   script_dir = os.path.abspath(os.path.dirname(sys.argv[0]) or '.')
   TEC = '4G'
   pathToSaving = script_dir + '/export/'+TEC+'/'
-  site = 'SubNetwork=ONRM_ROOT_MO_R,SubNetwork=LTE_NR,SubNetwork=TSP;SubNetwork=ONRM_ROOT_MO_R,SubNetwork=LTE,SubNetwork=TSP'
+  site = 'SubNetwork=ONRM_ROOT_MO_R,SubNetwork=LTE_NR,SubNetwork=TSP;SubNetwork=ONRM_ROOT_MO_R,SubNetwork=LTE,SubNetwork=TSP;SubNetwork=ONRM_ROOT_MO_R,SubNetwork=LTE,SubNetwork=TSP,SubNetwork=DUs;SubNetwork=ONRM_ROOT_MO_R,SubNetwork=LTE,SubNetwork=TSP,SubNetwork=RadioNodes'
   #get everything from table
   #site = ''
   frame_tableList = ImportDF.ImportDF2(script_dir+'/import/TableList/')
@@ -27,6 +27,7 @@ def processArchive(Content):
   CustomCMDList = frame_tableList['CustomCMD'].tolist()
   #dropList = frame_tableList['dropList'].tolist()[0].str.split(',')
   dropList = frame_tableList['keepList'].tolist()
+  UPDATE_List = frame_tableList['UPDATE'].tolist()
 
   dropList2 = []
   for i in dropList:
@@ -54,7 +55,7 @@ def processArchive(Content):
   count = 0
   for i in parameterList:
     s = ','.join(str(x) for x in i)
-    ENM_GetData.processArchive(site,tableList[count],s,dropList2[count],TEC,CustomCMDList[count])
+    ENM_GetData.processArchive(site,tableList[count],s,dropList2[count],TEC,CustomCMDList[count],UPDATE_List[count])
     count +=1
 
 

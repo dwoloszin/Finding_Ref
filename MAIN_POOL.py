@@ -1,5 +1,7 @@
 import subprocess
 import glob
+import timeit
+inicio = timeit.default_timer()
 
 
 
@@ -15,6 +17,10 @@ for cmd in commands:
 # Wait for all processes to complete
 for process in processes:
     process.wait()
+
+
+   
+
 
 
 #RUN in Parallel
@@ -56,3 +62,18 @@ for cmd in commands:
 for process in processes:
     process.wait()
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+fim = timeit.default_timer()
+print ('duracao TOTAL[FINAL]: %.2f' % ((fim - inicio)/60) + ' min')

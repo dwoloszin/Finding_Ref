@@ -22,6 +22,7 @@ def DUMP(TEC):
   for i in dirlist1:
     folderName = i.split('\\')[-1]
     Frame = ImportDF.ImportDF2(i)
+    Frame = Frame.loc[Frame['TEC'] == TEC]
     Frame.drop_duplicates(inplace=True)
     Frame.name = folderName
     Frame = change_columnsName(Frame)
@@ -63,6 +64,7 @@ def DUMP(TEC):
     else:
       print(key,value)
       f2 = getFrame(frameList,value)
+
       f2l = ListPair2.get(value)
       print('F2: ',f2.name)
       n2 = f2l +'_'+ f2.name
@@ -81,6 +83,8 @@ def DUMP(TEC):
   if not os.path.exists(pathToSave):
     os.makedirs(pathToSave) 
   Merged.drop_duplicates(inplace=True,ignore_index=True)
+  #ref to aggregate
+  #Merged.groupby(['A'], group_keys=False).apply(lambda x: x.loc[x.B.idxmax()])
   Merged.to_csv(pathToSave + TEC+'_' + this_function_name + '.csv',index=False,header=True,sep=';')
   
   fim = timeit.default_timer()
@@ -94,6 +98,11 @@ def tratarArchive(Frame):
     pass
   '''  
   return Frame
+
+
+
+
+
 
 def getFrame(frames_list,desired_frame_name):
   for frame in frames_list:

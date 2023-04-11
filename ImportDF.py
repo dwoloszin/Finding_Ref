@@ -44,6 +44,25 @@ def ImportDF2(pathImportSI):
 
     return frameSI 
 
+def ImportDF4(pathImportSI,index1):
+    #pathImportSI = os.getcwd() + '/export/'+folderName
+    all_filesSI = glob.glob(pathImportSI + "/*.csv")
+    all_filesSI.sort(key=lambda x: os.path.getmtime(x), reverse=True)
+    li = []
+    lastData = datetime.fromtimestamp(getmtime(all_filesSI[0])).strftime('%Y%m%d')
+    for filename in all_filesSI:
+        fileData = datetime.fromtimestamp(getmtime(filename)).strftime('%Y%m%d')
+        iter_csv = pd.read_csv(filename, index_col=None, encoding="UTF-8",header=0, error_bad_lines=False,dtype=str, sep = ';',decimal=',',iterator=True, chunksize=10000 )
+        df = pd.concat([chunk for chunk in iter_csv]) # & |  WORKS 
+        li.append(df)
+    frameSI = pd.concat(li, axis=0, ignore_index=True)
+    try:
+      frameSI = frameSI.groupby(index1).agg('first')
+      frameSI = frameSI.reset_index()
+    except:
+       pass
+    frameSI = frameSI.drop_duplicates()
+    return frameSI 
 
 
 #Corrigir qdo não tem 2 arquivos

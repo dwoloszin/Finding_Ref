@@ -6,6 +6,7 @@ import pandas as pd
 import inspect
 import SplitValues
 import GroupBy
+import TratarSync
 
 
 
@@ -23,6 +24,7 @@ def FeatureState(TEC):
     Frame.drop_duplicates(inplace=True)
     Frame['TEC'] = TEC
     Frame = tratarArchive(Frame)
+    Frame = TratarSync.processArchive(Frame,['NodeId'])
     Frame.to_csv(pathToSave + TEC+'_' + this_function_name + '.csv',index=False,header=True,sep=';')
   fim = timeit.default_timer()
   print ('duracao: %.2f' % ((fim - inicio)/60) + ' min')
@@ -49,4 +51,13 @@ def tratarArchive(Frame):
   
   return Frame
 
-FeatureState('5G')
+
+
+
+script_dir = os.path.abspath(os.path.dirname(sys.argv[0]) or '.')
+frame_tableList = ImportDF.ImportDF2(script_dir+'/import/TableList/')
+frame_tableList.drop(frame_tableList[frame_tableList['TableList'] != 'FeatureState'].index, inplace=True)
+TEC_List = frame_tableList['TEC'].tolist()
+
+for i in TEC_List:
+  FeatureState(i) 

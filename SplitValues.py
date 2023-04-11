@@ -41,10 +41,30 @@ def processArchive3(frameSI,columnNAME,valueSearch):
         SectorEqui = i.partition(valueSearch)[2].split(']')[0]
         li.append(SectorEqui)
       for h in li:
+        #print(h)
+        #if h != '' and h not in stringB: 
+        stringB += h + '|'  
+      frameSI.at[index,valueSearch[:-1]] = stringB[:-1]
+  return frameSI
+
+
+def processArchive3_1(frameSI,columnNAME,valueSearch):
+  for index, row in frameSI.iterrows():
+    listData = []
+    li = []
+    stringB = ''
+    if valueSearch in str(row[columnNAME]):
+      string0 = row[columnNAME].replace(',',';').split(';')
+      for i in string0:
+        SectorEqui = i.partition(valueSearch)[2].split(']')[0]
+        li.append(SectorEqui)
+      for h in li:
         if h != '' and h not in stringB:
           stringB += h + '|'    
       frameSI.at[index,valueSearch[:-1]] = stringB[:-1]
   return frameSI
+
+
 
 def processArchive4(frameSI,columnNAME,valueSearch):
   for index, row in frameSI.iterrows():
@@ -61,4 +81,5 @@ def processArchive4(frameSI,columnNAME,valueSearch):
           stringB += h + '|'    
       frameSI.at[index,valueSearch[:-1]] = stringB[:-1]
   return frameSI
+
 
