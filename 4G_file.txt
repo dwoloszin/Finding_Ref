@@ -2,11 +2,11 @@ TableName_AuxPlugInUnit
 NodeId
 syncStatus
 EquipmentId
-RbsSubrackId
-RbsSlotId
 AuxPlugInUnitId
 isSharedWithExternalMe
 productData
+RbsSubrackId
+RbsSlotId
 TableName_CommonBeamforming
 NodeId
 syncStatus
