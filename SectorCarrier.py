@@ -25,6 +25,8 @@ def SectorCarrier(TEC):
     
     Frame = tratarArchive(Frame)
     Frame = TratarSync.processArchive(Frame,['EUtranCellFDD'])
+    droplist = ['NodeId','syncStatus','ENodeBFunctionId','SectorCarrierId','reservedBy','sectorFunctionRef','SITE']
+    Frame.drop(droplist, errors='ignore', axis=1,inplace=True)
     Frame.to_csv(pathToSave + TEC+'_' + this_function_name + '.csv',index=False,header=True,sep=';')
   fim = timeit.default_timer()
   print (f'{this_function_name} duracao: %.2f' % ((fim - inicio)/60) + ' min')
@@ -40,6 +42,13 @@ def tratarArchive(frameSI):
     frameSI.loc[(frameSI['EUtranCellFDD'].isna())&
                 (np.array(list(map(len,frameSI['SectorCarrierId'].astype(str).values))) > 2),['EUtranCellFDD']] = frameSI['SITE'].astype(str) + '-'+frameSI['SectorCarrierId'].astype(str)
     frameSI['Ref'] = frameSI['NodeId'].astype(str) + frameSI['SectorEquipmentFunction'].astype(str)
+    #splitValue = 'EUtranCellFDD'
+    #frameSI = (frameSI.set_index(frameSI.columns.drop(splitValue,1).tolist())[splitValue].str.split('|', expand=True).stack().reset_index().rename(columns={0:splitValue}).loc[:, frameSI.columns] )
+
+    frameSI['EUtranCellFDD'] = frameSI['EUtranCellFDD'].str.replace('|', '',regex=True)
+    frameSI['UlCompGroup'] = frameSI['UlCompGroup'].str.replace('\D', '', regex=True) #removing all caracter besides numbers
+    #frameSI['UlCompGroup'] = frameSI['UlCompGroup'].str.replace('\d+', '', regex=True) #removing all numbers besides caracters
+
   except:
     pass
   return frameSI

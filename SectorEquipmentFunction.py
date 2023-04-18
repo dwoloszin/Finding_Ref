@@ -35,7 +35,27 @@ def SectorEquipmentFunction(TEC):
 
     except:
       pass
+    try:  
+      Frame['Ref2'] = Frame['NodeId'].astype(str) + Frame['FieldReplaceableUnit'].astype(str)
+    except:
+      pass
+    RfBranch = Frame.copy()
+    droplist = ['NodeId','syncStatus','NodeSupportId','reservedBy','rfBranchRef','SectorCarrier','RfBranch','SITE','Ref2']
+    Frame.drop(droplist, errors='ignore', axis=1,inplace=True)
     Frame.to_csv(pathToSave + TEC+'_' + this_function_name + '.csv',index=False,header=True,sep=';')
+    
+    droplist2 = ['NodeId','syncStatus','NodeSupportId','reservedBy','rfBranchRef','SectorCarrier','RfBranch','SITE','availableHwOutputPower','EUtranCellFDD','TableName_SectorEquipmentFunction']
+    RfBranch.drop(droplist2, errors='ignore', axis=1,inplace=True)
+    try:
+      RfBranch = RfBranch.loc[~RfBranch['FieldReplaceableUnit'].isna()]
+    except:
+      pass
+    
+    RfBranch['TableName_RfBranch'] = 'SectorEquipmentFunction'
+    RfBranch.rename(columns={'SectorEquipmentFunctionId': 'AntennaUnitGroupId'}, inplace=True)
+    pathToSave2 = script_dir + '/export/'+'PROCESS'+'/'+'RfBranch' +'/'
+    RfBranch.drop_duplicates(inplace=True)
+    RfBranch.to_csv(pathToSave2 + TEC+'_' + this_function_name + '.csv',index=False,header=True,sep=';')
 
 
   fim = timeit.default_timer()
@@ -48,7 +68,7 @@ def tratarArchive(Frame):
     Frame = SplitValues.processArchive3(Frame,'reservedBy','SectorCarrier=')
     Frame = SplitValues.processArchive3(Frame,'rfBranchRef','RfBranch=')
     Frame = SplitValues.processArchive3(Frame,'rfBranchRef','FieldReplaceableUnit=')
-    
+    Frame.loc[Frame['NodeId'].str[:3] == '4S-',['NodeId']] = '4G-' + Frame['NodeId'].str[3:]# Corrigir SKY q mudou de ID
     Frame['FieldReplaceableUnit'] = Frame['FieldReplaceableUnit'].str.split(',').str[0]
     splitValue = 'SectorCarrier'
     Frame = (Frame.set_index(Frame.columns.drop(splitValue,1).tolist())[splitValue].str.split('|', expand=True).stack().reset_index().rename(columns={0:splitValue}).loc[:, Frame.columns] )

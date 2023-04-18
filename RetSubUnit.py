@@ -25,6 +25,8 @@ def RetSubUnit(TEC):
     Frame['TEC'] = TEC
     Frame = tratarArchive(Frame)
     Frame = TratarSync.processArchive(Frame,['NodeId','AntennaUnitGroupId'])
+    droplist = ['syncStatus','EquipmentId','AntennaNearUnitId','RetSubUnitId']
+    Frame.drop(droplist, errors='ignore', axis=1,inplace=True)
     Frame.to_csv(pathToSave + TEC+'_' + this_function_name + '.csv',index=False,header=True,sep=';')
   fim = timeit.default_timer()
   print (f'{this_function_name} duracao: %.2f' % ((fim - inicio)/60) + ' min')
@@ -34,13 +36,14 @@ def RetSubUnit(TEC):
 
 def tratarArchive(Frame):
   
-  '''
+  
   try:
-    Frame = SplitValues.processArchive(Frame,'productData')
+    Frame.loc[Frame['NodeId'].str[:3] == '4S-',['NodeId']] = '4G-' + Frame['NodeId'].str[3:]# Corrigir SKY q mudou de ID
+    Frame['Ref'] = Frame['NodeId'].astype(str) + Frame['AntennaUnitGroupId'].astype(str) 
   except:
     pass
-  Frame['Ref_0'] = Frame['NodeId'].astype(str) + Frame['FieldReplaceableUnitId'].astype(str)
-  '''  
+   
+   
   return Frame
 
 

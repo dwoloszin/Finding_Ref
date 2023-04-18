@@ -25,6 +25,8 @@ def FieldReplaceableUnit(TEC):
     Frame['TEC'] = TEC
     Frame = tratarArchive(Frame)
     Frame = TratarSync.processArchive(Frame,['NodeId','FieldReplaceableUnitId','serialNumber'])
+    droplist = ['syncStatus','EquipmentId','productData']
+    Frame.drop(droplist, errors='ignore', axis=1,inplace=True)
     Frame.to_csv(pathToSave + TEC+'_' + this_function_name + '.csv',index=False,header=True,sep=';')
   fim = timeit.default_timer()
   print (f'{this_function_name} duracao: %.2f' % ((fim - inicio)/60) + ' min')
@@ -36,10 +38,18 @@ def tratarArchive(Frame):
   
   
   try:
-    Frame = SplitValues.processArchive(Frame,'productData')
+    #Frame = SplitValues.processArchive(Frame,'productData')
+    Frame = SplitValues.processArchive3(Frame,'productData','productionDate=')
+    Frame = SplitValues.processArchive3(Frame,'productData','serialNumber=')
+    Frame = SplitValues.processArchive3(Frame,'productData','productName=')
+    Frame = SplitValues.processArchive3(Frame,'productData','productNumber=')
+    Frame = SplitValues.processArchive3(Frame,'productData','productRevision=')
+    listCorrection = ['productionDate','serialNumber','productName','productNumber','productRevision']
+    for i in listCorrection:
+      Frame[i] = Frame[i].str.replace('|', '',regex=True)
   except:
     pass
-  Frame['Ref_0'] = Frame['NodeId'].astype(str) + Frame['FieldReplaceableUnitId'].astype(str)
+  Frame['Ref'] = Frame['NodeId'].astype(str) + Frame['FieldReplaceableUnitId'].astype(str)
     
   return Frame
 

@@ -25,6 +25,8 @@ def eutrancellfdd(TEC):
     Frame['TEC'] = TEC
     Frame = tratarArchive(Frame)
     Frame = TratarSync.processArchive(Frame,['EUtranCellFDDId'])
+    #Tratar 1800s
+    Frame.loc[(Frame['earfcndl'].isin(['1700','1525','1575'])),['FREQ CELL']] = '1800s'
     Frame.to_csv(pathToSave + TEC+'_' + this_function_name + '.csv',index=False,header=True,sep=';')
   fim = timeit.default_timer()
   print ('duracao: %.2f' % ((fim - inicio)/60) + ' min')
@@ -34,6 +36,7 @@ def tratarArchive(Frame):
 
   
   try:
+    
     Frame.loc[(Frame['NodeId'].isna()) & (Frame['earfcndl'].isin(['1700','1525','1575'])),['NodeId']] = Frame['EUtranCellFDDId'].str[:-2]
     Frame.loc[(Frame['NodeId'].isna()) & (~Frame['earfcndl'].isin(['1700','1525','1575'])),['NodeId']] = Frame['EUtranCellFDDId'].str[:-1]
     Frame.loc[Frame['TableName_eutrancellfdd'].isna(),['TableName_eutrancellfdd']] = 'eutrancellfdd'
@@ -47,6 +50,8 @@ def tratarArchive(Frame):
     Frame['BW DL'] = Frame['BW DL'].astype(str) + ' M'
     
     Frame['FREQ CELL'] = Frame['freqBand'].map({'1':'2100','3':'1800','7':'2600','28':'700'})
+    #tratar freq band 0
+    #Frame.loc[(Frame['freqBand'].isna()) & (Frame['earfcndl'].isin(['1700','1525','1575'])),['NodeId']] = Frame['EUtranCellFDDId'].str[:-2]
     
     Frame['Tecnologia'] = '4G'
     Frame['PCI'] = (Frame['physicalLayerCellIdGroup'].astype(int)*3) + (Frame['physicalLayerSubCellId'].astype(int))
@@ -55,7 +60,7 @@ def tratarArchive(Frame):
     Frame = ShortName.tratarShortNumber(Frame,'SITE')
   except:
     pass
-  droplist = ['ENodeBFunctionId','dlChannelBandwidth','freqBand','physicalLayerCellIdGroup','physicalLayerSubCellId']
+  droplist = ['ENodeBFunctionId','dlChannelBandwidth','physicalLayerCellIdGroup','physicalLayerSubCellId']
   Frame.drop(droplist, axis=1, inplace=True,errors='ignore')  
     
   return Frame

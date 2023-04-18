@@ -36,7 +36,7 @@ def DUMP(TEC):
   FrameRelation = FrameRelation.loc[FrameRelation['TEC'] == TEC]
   FrameRelation['Frame1'] = FrameRelation['Frame1']+'_'+FrameRelation['Frame2']
   #FrameRelation['Relation1'] = FrameRelation['Relation1']+'_'+FrameRelation['Frame1'].str.split('_').str[0]
-  print(FrameRelation)
+  #print(FrameRelation)
   
   keys = FrameRelation['Frame1'].tolist()
   values = FrameRelation['Relation1'].tolist()
@@ -69,11 +69,11 @@ def DUMP(TEC):
       print('F2: ',f2.name)
       n2 = f2l +'_'+ f2.name
 
-      print(Merged.head(2))
-      print(Merged.head(2))
+      #print(Merged.head(2))
+      #print(Merged.head(2))
       print('Merged_'+str(f2.name))
       f1l = ListPair2.get('Merged_'+str(f2.name))
-      print(f1l)
+      #print(f1l)
 
       Merged = pd.merge(Merged,f2, how='left',left_on=[f1l],right_on=[n2])
       Merged.name = 'Merged_'+f2.name

@@ -24,6 +24,8 @@ def enodebfunction(TEC):
     Frame['TEC'] = TEC
     Frame = tratarArchive(Frame)
     Frame = TratarSync.processArchive(Frame,['NodeId'])
+    droplist = ['syncStatus']
+    Frame.drop(droplist, errors='ignore', axis=1,inplace=True)
     Frame.to_csv(pathToSave + TEC+'_' + this_function_name + '.csv',index=False,header=True,sep=';')
   fim = timeit.default_timer()
   print ('duracao: %.2f' % ((fim - inicio)/60) + ' min')

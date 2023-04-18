@@ -24,6 +24,8 @@ def ReportConfigB1GUtra(TEC):
     Frame['TEC'] = TEC
     Frame = tratarArchive(Frame)
     Frame = TratarSync.processArchive(Frame,['EUtranCellFDDId'])
+    droplist = ['NodeId','syncStatus','ENodeBFunctionId','UeMeasControlId','ReportConfigB1GUtraId']
+    Frame.drop(droplist, errors='ignore', axis=1,inplace=True)
     Frame.to_csv(pathToSave + TEC+'_' + this_function_name + '.csv',index=False,header=True,sep=';')
   fim = timeit.default_timer()
   print (f'{this_function_name} duracao: %.2f' % ((fim - inicio)/60) + ' min')

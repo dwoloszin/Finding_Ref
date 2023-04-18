@@ -24,17 +24,32 @@ def AuxPlugInUnit(TEC):
     Frame['TEC'] = TEC
     Frame = tratarArchive(Frame)
     Frame = TratarSync.processArchive(Frame,['NodeId','AuxPlugInUnitId','serialNumber'])
+    droplist = ['syncStatus','productData']
+    Frame.drop(droplist, errors='ignore', axis=1,inplace=True)
     Frame.to_csv(pathToSave + TEC+'_' + this_function_name + '.csv',index=False,header=True,sep=';')
+    FieldReplaceableUnit = Frame.copy()
+    FieldReplaceableUnit.rename(columns={'TableName_AuxPlugInUnit': 'TableName_FieldReplaceableUnit',
+                                         'AuxPlugInUnitId':'FieldReplaceableUnitId'}, inplace=True)
+    pathToSave2 = script_dir + '/export/'+'PROCESS'+'/'+'FieldReplaceableUnit' +'/'
+    FieldReplaceableUnit.to_csv(pathToSave2 + TEC+'_' + this_function_name + '.csv',index=False,header=True,sep=';')
   fim = timeit.default_timer()
   print ('duracao: %.2f' % ((fim - inicio)/60) + ' min')
 
 def tratarArchive(Frame):
   try:
-    Frame = SplitValues.processArchive(Frame,'productData')
+    Frame = SplitValues.processArchive3(Frame,'productData','productionDate=')
+    Frame = SplitValues.processArchive3(Frame,'productData','serialNumber=')
+    Frame = SplitValues.processArchive3(Frame,'productData','productName=')
+    Frame = SplitValues.processArchive3(Frame,'productData','productNumber=')
+    Frame = SplitValues.processArchive3(Frame,'productData','productRevision=')
+    listCorrection = ['productionDate','serialNumber','productName','productNumber','productRevision']
+    for i in listCorrection:
+      Frame[i] = Frame[i].str.replace('|', '',regex=True)
   except:
     pass
-  droplist = ['EquipmentId','RbsSubrackId']
+  droplist = ['EquipmentId','RbsSubrackId','RbsSlotId']
   Frame.drop(droplist, axis=1, inplace=True,errors='ignore')
+  Frame['Ref'] = Frame['NodeId'].astype(str) + Frame['AuxPlugInUnitId'].astype(str)
   return Frame
 
 

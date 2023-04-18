@@ -25,6 +25,8 @@ def RfBranch(TEC):
     Frame['TEC'] = TEC
     Frame = tratarArchive(Frame)
     Frame = TratarSync.processArchive(Frame,['NodeId','AntennaUnitGroupId'])
+    droplist = ['NodeId','syncStatus','EquipmentId','RfBranchId','reservedBy','rfPortRef','RfPort','AuxPlugInUnit']
+    Frame.drop(droplist, errors='ignore', axis=1,inplace=True)
     Frame.to_csv(pathToSave + TEC+'_' + this_function_name + '.csv',index=False,header=True,sep=';')
   fim = timeit.default_timer()
   print (f'{this_function_name} duracao: %.2f' % ((fim - inicio)/60) + ' min')
@@ -34,10 +36,13 @@ def tratarArchive(frameSI):
     frameSI = SplitValues.processArchive3_1(frameSI,'rfPortRef','FieldReplaceableUnit=')
     frameSI = SplitValues.processArchive3_1(frameSI,'rfPortRef','RfPort=')
     frameSI = SplitValues.processArchive3_1(frameSI,'rfPortRef','AuxPlugInUnit=')
+    frameSI.loc[frameSI['NodeId'].str[:3] == '4S-',['NodeId']] = '4G-' + frameSI['NodeId'].str[3:]# Corrigir SKY q mudou de ID
     frameSI.loc[~frameSI['AuxPlugInUnit'].isna(),['FieldReplaceableUnit']] = frameSI['AuxPlugInUnit']
-    frameSI['Ref'] = frameSI['NodeId'].astype(str) + frameSI['AntennaUnitGroupId'].astype(str)
+    #frameSI['Ref'] = frameSI['NodeId'].astype(str) + frameSI['AntennaUnitGroupId'].astype(str)
   except:
     pass
+  frameSI['Ref'] = frameSI['NodeId'].astype(str) + frameSI['AntennaUnitGroupId'].astype(str)
+  frameSI['Ref2'] = frameSI['NodeId'].astype(str) + frameSI['FieldReplaceableUnit'].astype(str)
   return frameSI
 
 

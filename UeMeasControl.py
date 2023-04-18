@@ -27,6 +27,8 @@ def UeMeasControl(TEC):
     Frame['TEC'] = TEC
     Frame = tratarArchive(Frame)
     Frame = TratarSync.processArchive(Frame,['EUtranCellFDDId'])
+    droplist = ['NodeId','syncStatus','ENodeBFunctionId','UeMeasControlId']
+    Frame.drop(droplist, errors='ignore', axis=1,inplace=True)
     Frame.to_csv(pathToSave + TEC+'_' + this_function_name + '.csv',index=False,header=True,sep=';')
 
 

@@ -25,6 +25,8 @@ def UePolicyOptimization(TEC):
     Frame['TEC'] = TEC
     Frame = tratarArchive(Frame)
     Frame = TratarSync.processArchive(Frame,['NodeId'])
+    droplist = ['syncStatus','ENodeBFunctionId','UePolicyOptimizationId']
+    Frame.drop(droplist, errors='ignore', axis=1,inplace=True)
     Frame.to_csv(pathToSave + TEC+'_' + this_function_name + '.csv',index=False,header=True,sep=';')
 
 
