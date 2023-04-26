@@ -8,7 +8,7 @@ inicio = timeit.default_timer()
 #UPDATE Data
 # Define the commands to run in parallel
 commands = ['python MAIN_3G.py','python MAIN_4G.py', 'python MAIN_5G.py']
-#commands = ['python MAIN_4G.py']
+#commands = ['python MAIN_3G.py']
 
 # Run the commands in parallel
 processes = []

@@ -7,6 +7,8 @@ import ImportDF
 import pandas as pd
 import subprocess
 import numpy as np
+import subprocess
+
 
 
 
@@ -52,11 +54,25 @@ def processArchive(Content):
     print(parameterList)
     #setup for get everthing from a site
 
+
   count = 0
-  for i in parameterList:
+  cmd_List = []
+  for i in parameterList: 
     s = ','.join(str(x) for x in i)
-    ENM_GetData.processArchive(site,tableList[count],s,dropList2[count],TEC,CustomCMDList[count],UPDATE_List[count])
+    cmd2 = []
+    cmd2.append("python")
+    cmd2.append("-c")
+    cmd2.append(f"from ENM_GetData import processArchive; processArchive('{site}','{tableList[count]}','{s}','{TEC}','{CustomCMDList[count]}','{UPDATE_List[count]}')")
+    cmd_List.append(cmd2)
+    #ENM_GetData.processArchive(site,tableList[count],s,TEC,CustomCMDList[count],UPDATE_List[count])
     count +=1
+    
+  processes = []
+  for cmd in cmd_List:
+    processes.append(subprocess.Popen(cmd, shell=True))
+  # Wait for all processes to complete
+  for process in processes:
+      process.wait()
 
 
 

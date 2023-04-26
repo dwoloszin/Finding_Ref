@@ -7,7 +7,7 @@ import shutil
 
 
 
-def processArchive(site,table,parameterList,dropList,TEC,CustomCMD,UPDATE_List):
+def processArchive(site,table,parameterList,TEC,CustomCMD,UPDATE_List):
   
   if UPDATE_List == 'TRUE':
     inicio = timeit.default_timer()
@@ -37,12 +37,14 @@ def processArchive(site,table,parameterList,dropList,TEC,CustomCMD,UPDATE_List):
       if not os.path.exists(csv_path):
         os.makedirs(csv_path)    
       Frame = tratarArchive(Frame)
+      '''
       if len(dropList)>0:
         dropList.append('TableName_'+pathToSave)
         KeepListCompared = dropList  
         locationBase_comparePMO = Frame.columns
         DellListComparede = list(set(locationBase_comparePMO)^set(KeepListCompared))
         Frame.drop(DellListComparede,inplace=True, axis=1,errors='ignore')
+      '''
       Frame.to_csv(csv_path + TEC+'_' + ArchiveName1 + '.csv',index=False,header=True,sep=';')
       frameCount +=1
     fim = timeit.default_timer()

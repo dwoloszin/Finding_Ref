@@ -98,9 +98,9 @@ sectorShape
 TableName_SectorEquipmentFunction
 NodeId
 syncStatus
-NodeSupportId
 SectorEquipmentFunctionId
 availableHwOutputPower
+NodeSupportId
 reservedBy
 rfBranchRef
 TableName_Slot
