@@ -132,6 +132,7 @@ maxTilt
 minTilt
 tiltChangeStatus
 userLabel
+AntennaUnitGroupId
 TableName_SectorEquipmentFunction
 NodeId
 syncStatus

@@ -21,7 +21,7 @@ def ImportDF(pathName,folderName):
     lastData = datetime.fromtimestamp(getmtime(all_filesSI[0])).strftime('%Y%m%d')
     for filename in all_filesSI:
         fileData = datetime.fromtimestamp(getmtime(filename)).strftime('%Y%m%d')
-        iter_csv = pd.read_csv(filename, index_col=None, encoding="UTF-8",header=0, error_bad_lines=False,dtype=str, sep = ';',decimal=',',iterator=True, chunksize=10000 )
+        iter_csv = pd.read_csv(filename, index_col=None, encoding="UTF-8",header=0, on_bad_lines='skip',dtype=str, sep = ';',decimal=',',iterator=True, chunksize=10000 )
         df = pd.concat([chunk for chunk in iter_csv]) # & |  WORKS 
         li.append(df)
     frameSI = pd.concat(li, axis=0, ignore_index=True)
@@ -36,7 +36,7 @@ def ImportDF2(pathImportSI):
     lastData = datetime.fromtimestamp(getmtime(all_filesSI[0])).strftime('%Y%m%d')
     for filename in all_filesSI:
         fileData = datetime.fromtimestamp(getmtime(filename)).strftime('%Y%m%d')
-        iter_csv = pd.read_csv(filename, index_col=None, encoding="UTF-8",header=0, error_bad_lines=False,dtype=str, sep = ';',decimal=',',iterator=True, chunksize=10000 )
+        iter_csv = pd.read_csv(filename, index_col=None, encoding="UTF-8",header=0, on_bad_lines='skip',dtype=str, sep = ';',decimal=',',iterator=True, chunksize=10000 )
         df = pd.concat([chunk for chunk in iter_csv]) # & |  WORKS 
         li.append(df)
     frameSI = pd.concat(li, axis=0, ignore_index=True)
@@ -52,7 +52,7 @@ def ImportDF4(pathImportSI,index1):
     lastData = datetime.fromtimestamp(getmtime(all_filesSI[0])).strftime('%Y%m%d')
     for filename in all_filesSI:
         fileData = datetime.fromtimestamp(getmtime(filename)).strftime('%Y%m%d')
-        iter_csv = pd.read_csv(filename, index_col=None, encoding="UTF-8",header=0, error_bad_lines=False,dtype=str, sep = ';',decimal=',',iterator=True, chunksize=10000 )
+        iter_csv = pd.read_csv(filename, index_col=None, encoding="UTF-8",header=0, on_bad_lines='skip',dtype=str, sep = ';',decimal=',',iterator=True, chunksize=10000 )
         df = pd.concat([chunk for chunk in iter_csv]) # & |  WORKS 
         li.append(df)
     frameSI = pd.concat(li, axis=0, ignore_index=True)
@@ -74,7 +74,7 @@ def ImportDF3(pathImportSI,index1):
     lastData = datetime.fromtimestamp(getmtime(all_filesSI[0])).strftime('%Y%m%d')
     for filename in all_filesSI:
         fileData = datetime.fromtimestamp(getmtime(filename)).strftime('%Y%m%d')
-        iter_csv = pd.read_csv(filename, index_col=None, encoding="UTF-8",header=0, error_bad_lines=False,dtype=str, sep = ';',decimal=',',iterator=True, chunksize=10000 )
+        iter_csv = pd.read_csv(filename, index_col=None, encoding="UTF-8",header=0, on_bad_lines='skip',dtype=str, sep = ';',decimal=',',iterator=True, chunksize=10000 )
         df = pd.concat([chunk for chunk in iter_csv]) # & |  WORKS
         li.append(df)
     firstLoop = True
