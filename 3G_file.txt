@@ -13,6 +13,7 @@ productNumber
 productRevision
 reservedBy
 serialNumber
+Server
 SectorAntennaId
 TableName_EthernetPort
 NodeId
@@ -23,6 +24,7 @@ admOperatingMode
 autoNegEnable
 ethernetPortId
 operOperatingMode
+Server
 TableName_FieldReplaceableUnit
 NodeId
 syncStatus
@@ -30,12 +32,14 @@ EquipmentId
 FieldReplaceableUnitId
 isSharedWithExternalMe
 productData
+Server
 TableName_LocationArea
 NodeId
 syncStatus
 RncFunctionId
 LocationAreaId
 lac
+Server
 TableName_PlugInUnit
 NodeId
 syncStatus
@@ -44,6 +48,7 @@ SubrackId
 SlotId
 PlugInUnitId
 unitType
+Server
 TableName_RetSubUnit
 NodeId
 syncStatus
@@ -56,14 +61,7 @@ maxTilt
 minTilt
 tiltChangeStatus
 userLabel
-TableName_RfBranch
-NodeId
-syncStatus
-EquipmentId
-AntennaUnitGroupId
-RfBranchId
-reservedBy
-rfPortRef
+Server
 TableName_SectorEquipmentFunction
 NodeId
 syncStatus
@@ -72,6 +70,7 @@ SectorEquipmentFunctionId
 reservedBy
 rfBranchRef
 sectorEquipmentFunctionId
+Server
 TableName_Slot
 NodeId
 syncStatus
@@ -79,6 +78,7 @@ EquipmentId
 SubrackId
 SlotId
 productData
+Server
 TableName_UtranCell
 NodeId
 syncStatus
@@ -112,3 +112,4 @@ tpsPowerLockState
 uarfcnDl
 uarfcnUl
 uraRef
+Server

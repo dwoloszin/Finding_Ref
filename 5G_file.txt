@@ -6,6 +6,7 @@ NRSectorCarrierId
 CommonBeamformingId
 digitalTilt
 usedDigitalTilt
+Server
 TableName_EthernetPort
 NodeId
 syncStatus
@@ -15,6 +16,7 @@ admOperatingMode
 autoNegEnable
 ethernetPortId
 operOperatingMode
+Server
 TableName_FeatureState
 NodeId
 syncStatus
@@ -24,6 +26,7 @@ FeatureStateId
 featureState
 featureStateId
 serviceState
+Server
 TableName_FieldReplaceableUnit
 NodeId
 syncStatus
@@ -31,21 +34,25 @@ EquipmentId
 FieldReplaceableUnitId
 isSharedWithExternalMe
 productData
+Server
 TableName_GNBCUCPFunction
 NodeId
 syncStatus
 GNBCUCPFunctionId
 rrcReestSupportType
+Server
 TableName_GNBCUUPFunction
 NodeId
 syncStatus
 GNBCUUPFunctionId
 endcDlNrRetProhibTimer
+Server
 TableName_GNBDUFunction
 NodeId
 syncStatus
 GNBDUFunctionId
 gNBId
+Server
 TableName_McpcPCellProfile
 NodeId
 syncStatus
@@ -57,6 +64,7 @@ rsrpCandidateB2
 rsrpCritical
 rsrpCriticalEnabled
 rsrpSearchZone
+Server
 TableName_McpcPSCellProfileUeCfg
 NodeId
 syncStatus
@@ -68,6 +76,7 @@ rsrpCandidateA5
 rsrpCritical
 rsrpCriticalEnabled
 rsrpSearchZone
+Server
 TableName_NRCellDU
 NodeId
 syncStatus
@@ -100,6 +109,7 @@ ssbFrequency
 ssbPowerBoost
 ssbSubCarrierSpacing
 ul256QamEnabled
+Server
 TableName_NRSectorCarrier
 NodeId
 syncStatus
@@ -113,6 +123,7 @@ noOfUsedTxAntennas
 nRSectorCarrierId
 reservedBy
 sectorEquipmentFunctionRef
+Server
 TableName_QciProfileEndcConfigExt
 NodeId
 syncStatus
@@ -120,6 +131,7 @@ GNBCUCPFunctionId
 QciProfileEndcConfigExtId
 initialUplinkConf
 ulDataSplitThreshold
+Server
 TableName_RetSubUnit
 NodeId
 syncStatus
@@ -132,7 +144,7 @@ maxTilt
 minTilt
 tiltChangeStatus
 userLabel
-AntennaUnitGroupId
+Server
 TableName_SectorEquipmentFunction
 NodeId
 syncStatus
@@ -141,6 +153,7 @@ SectorEquipmentFunctionId
 availableHwOutputPower
 reservedBy
 rfBranchRef
+Server
 TableName_TermPointToAmf
 NodeId
 syncStatus
@@ -156,3 +169,4 @@ servedGuamiList
 sNSSAIList
 termPointToAmfId
 usedIpAddress
+Server

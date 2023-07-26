@@ -59,6 +59,7 @@ def processArchiveReturn2(cmd):
               headers.append(cell.labels()[0])
             listData.append(row)
           df = pd.DataFrame(listData, columns = headers)
+          df['Server'] = ENM
           df = df.drop_duplicates()
           df = df.reset_index(drop=True) # reset the index
           listaDF.append(df)  

@@ -2,11 +2,20 @@ TableName_AuxPlugInUnit
 NodeId
 syncStatus
 EquipmentId
+RbsSubrackId
+RbsSlotId
 AuxPlugInUnitId
 isSharedWithExternalMe
 productData
-RbsSubrackId
-RbsSlotId
+Server
+TableName_CarrierAggregationFunction
+NodeId
+syncStatus
+ENodeBFunctionId
+CarrierAggregationFunctionId
+caOffloadingMode
+offloadingDataThresh
+Server
 TableName_CommonBeamforming
 NodeId
 syncStatus
@@ -15,6 +24,15 @@ NRSectorCarrierId
 CommonBeamformingId
 digitalTilt
 usedDigitalTilt
+Server
+TableName_EUtranFreqRelation
+NodeId
+syncStatus
+ENodeBFunctionId
+EUtranCellFDDId
+EUtranFreqRelationId
+caOffloadingEnabled
+Server
 TableName_EthernetPort
 NodeId
 syncStatus
@@ -24,6 +42,7 @@ admOperatingMode
 autoNegEnable
 ethernetPortId
 operOperatingMode
+Server
 TableName_FieldReplaceableUnit
 NodeId
 syncStatus
@@ -31,6 +50,7 @@ EquipmentId
 FieldReplaceableUnitId
 isSharedWithExternalMe
 productData
+Server
 TableName_PlugInUnit
 NodeId
 syncStatus
@@ -45,6 +65,7 @@ piuGroupNumber
 piuType
 positionRef
 userLabel
+Server
 TableName_ReportConfigB1GUtra
 NodeId
 syncStatus
@@ -53,6 +74,7 @@ EUtranCellFDDId
 UeMeasControlId
 ReportConfigB1GUtraId
 b1ThresholdRsrp
+Server
 TableName_ReportConfigB1NR
 NodeId
 syncStatus
@@ -61,6 +83,7 @@ EUtranCellFDDId
 UeMeasControlId
 ReportConfigB1NRId
 b1ThresholdRsrp
+Server
 TableName_RetSubUnit
 NodeId
 syncStatus
@@ -73,6 +96,7 @@ maxTilt
 minTilt
 tiltChangeStatus
 userLabel
+Server
 AntennaUnitGroupId
 TableName_RfBranch
 NodeId
@@ -82,6 +106,7 @@ AntennaUnitGroupId
 RfBranchId
 reservedBy
 rfPortRef
+Server
 TableName_SectorCarrier
 NodeId
 syncStatus
@@ -95,11 +120,13 @@ reservedBy
 sectorCarrierType
 sectorFunctionRef
 sectorShape
+Server
 TableName_SectorEquipmentFunction
 NodeId
 syncStatus
 SectorEquipmentFunctionId
 availableHwOutputPower
+Server
 NodeSupportId
 reservedBy
 rfBranchRef
@@ -110,6 +137,7 @@ EquipmentId
 SubrackId
 SlotId
 productData
+Server
 TableName_TermPointToAmf
 NodeId
 syncStatus
@@ -125,6 +153,7 @@ servedGuamiList
 sNSSAIList
 termPointToAmfId
 usedIpAddress
+Server
 TableName_UeMeasControl
 NodeId
 syncStatus
@@ -132,6 +161,7 @@ ENodeBFunctionId
 EUtranCellFDDId
 UeMeasControlId
 nrB1MeasAtEndcEnabled
+Server
 endcCheckForRwrToNRDisabled
 rwrToNRAllowed
 TableName_UePolicyOptimization
@@ -141,12 +171,14 @@ ENodeBFunctionId
 UePolicyOptimizationId
 endcAwareImc
 ueCapPrioList
+Server
 TableName_enodebfunction
 NodeId
 syncStatus
 ENodeBFunctionId
 eNBId
 eNodeBPlmnId
+Server
 TableName_eutrancellfdd
 NodeId
 syncStatus
@@ -155,6 +187,7 @@ EUtranCellFDDId
 additionalUpperLayerIndList
 endcAllowedPlmnList
 primaryUpperLayerInd
+Server
 administrativeState
 cellId
 crsGain
