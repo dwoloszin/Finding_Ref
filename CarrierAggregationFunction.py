@@ -22,7 +22,7 @@ def CarrierAggregationFunction(TEC):
     Frame.drop_duplicates(inplace=True)
     Frame['TEC'] = TEC
     Frame = tratarArchive(Frame)
-    #Frame = TratarSync.processArchive(Frame,['NodeId','EthernetPortId'])
+    Frame = TratarSync.processArchive(Frame,['NodeId'])
     Frame.to_csv(pathToSave + TEC+'_' + this_function_name + '.csv',index=False,header=True,sep=';')
   fim = timeit.default_timer()
   print ('duracao: %.2f' % ((fim - inicio)/60) + ' min')
