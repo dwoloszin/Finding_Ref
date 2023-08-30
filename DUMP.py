@@ -79,7 +79,7 @@ def DUMP(TEC):
       Merged.name = 'Merged_'+f2.name
       print(Merged.name)
       print('OK')
-  pathToSave = script_dir + '/export/'+this_function_name +'/'
+  pathToSave = script_dir + '/export/'+this_function_name +'/'+TEC+'/'
   if not os.path.exists(pathToSave):
     os.makedirs(pathToSave) 
   Merged.drop_duplicates(inplace=True,ignore_index=True)

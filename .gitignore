@@ -1,5 +1,6 @@
-export
-import
-credentials
-
+\export
+\import
+\credentials
+*.pyc
+*.txt
 

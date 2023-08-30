@@ -19,7 +19,8 @@ def enodebfunction(TEC):
   if not os.path.exists(pathToSave):
     os.makedirs(pathToSave)
   if os.path.exists(pathToImport):   
-    Frame = ImportDF.ImportDF2(pathToImport)
+    #Frame = ImportDF.ImportDF2(pathToImport)
+    Frame = ImportDF.ImportDF4(pathToImport,['NodeId'])
     Frame.drop_duplicates(inplace=True)
     Frame['TEC'] = TEC
     Frame = tratarArchive(Frame)

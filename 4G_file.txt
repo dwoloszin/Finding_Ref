@@ -2,12 +2,12 @@ TableName_AuxPlugInUnit
 NodeId
 syncStatus
 EquipmentId
-RbsSubrackId
-RbsSlotId
 AuxPlugInUnitId
 isSharedWithExternalMe
 productData
 Server
+RbsSubrackId
+RbsSlotId
 TableName_CarrierAggregationFunction
 NodeId
 syncStatus
@@ -179,6 +179,7 @@ ENodeBFunctionId
 eNBId
 eNodeBPlmnId
 Server
+ueCapabilityEnquirySteps
 TableName_eutrancellfdd
 NodeId
 syncStatus
